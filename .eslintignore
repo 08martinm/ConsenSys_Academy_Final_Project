@@ -1,0 +1,10 @@
+!.eslintrc.js # allow self-formating
+
+public
+node_modules
+contracts
+migrations
+scripts
+test
+.eslintrc
+.jest-test-results.json

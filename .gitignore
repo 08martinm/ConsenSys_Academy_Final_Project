@@ -1,0 +1,8 @@
+node_modules
+.eslintcache
+public/dist
+yarn-error.log
+.DS_Store
+.env
+.out
+.jest-test-results.json

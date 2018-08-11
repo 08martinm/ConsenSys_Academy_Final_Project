@@ -1,0 +1,162 @@
+{
+  "name": "distroreadit",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "node server",
+    "start": "nodemon server",
+    "storybook": "start-storybook -p 5001 -c config/storybook",
+    "storybook-deploy": "build-storybook -c config/storybook -o .out -- --source-branch=proj/regFlowComponents --ci",
+    "generate": "node ./config/generator/generateComponent.js",
+    "test": "jest --json --outputFile=.jest-test-results.json",
+    "test:watch": "jest --watchAll",
+    "build:prod": "webpack --config config/webpack/prod",
+    "start:prod": "yarn clear:dist && yarn build:prod && cross-env NODE_ENV=production node server",
+    "analyze-webpack": "yarn clear:dist && cross-env NODE_ENV=webpackStats yarn build:prod",
+    "clear:dist": "rimraf ./public/dist/*",
+    "precommit": "lint-staged",
+    "lint": "eslint . --cache",
+    "lint-staged": "lint-staged"
+  },
+  "devDependencies": {
+    "@storybook/addon-a11y": "^3.4.10",
+    "@storybook/addon-actions": "^3.4.10",
+    "@storybook/addon-backgrounds": "^3.4.10",
+    "@storybook/addon-centered": "^3.4.10",
+    "@storybook/addon-events": "^3.4.10",
+    "@storybook/addon-jest": "^3.4.10",
+    "@storybook/addon-knobs": "^3.4.10",
+    "@storybook/addon-links": "^3.4.10",
+    "@storybook/addon-notes": "^3.4.10",
+    "@storybook/addons": "^3.4.10",
+    "@storybook/react": "^3.4.10",
+    "@tokenfoundry/eslint-config": "^1.4.0",
+    "autoprefixer": "6.5.1",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-eslint": "7.1.1",
+    "babel-jest": "^23.4.2",
+    "babel-loader": "^7.1.1",
+    "babel-plugin-object-rest-spread": "^0.0.0",
+    "babel-plugin-styled-components": "^1.5.1",
+    "babel-plugin-transform-async-to-generator": "^6.24.1",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-es2017": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-react-app": "^2.0.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "babel-register": "^6.26.0",
+    "babel-runtime": "^6.26.0",
+    "case-sensitive-paths-webpack-plugin": "1.1.4",
+    "chalk": "1.1.3",
+    "connect-history-api-fallback": "1.3.0",
+    "cross-spawn": "4.0.2",
+    "css-loader": "^1.0.0",
+    "detect-port": "1.0.1",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "eslint": "^5.3.0",
+    "eslint-plugin-import": "^2.13.0",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
+    "eslint-plugin-react": "^7.10.0",
+    "eslint-plugin-require-underscore-lodash-import": "^0.1.0",
+    "extract-text-webpack-plugin": "1.0.1",
+    "file-loader": "^1.1.11",
+    "filesize": "3.3.0",
+    "fs-extra": "0.30.0",
+    "gzip-size": "3.0.0",
+    "html-webpack-plugin": "3.2.0",
+    "http-proxy-middleware": "0.17.2",
+    "husky": "^0.14.3",
+    "jest": "^23.4.2",
+    "jest-styled-components": "^5.0.1",
+    "json-loader": "0.5.4",
+    "lint-staged": "^7.2.0",
+    "nodemon": "^1.18.3",
+    "object-assign": "4.1.0",
+    "path-exists": "2.1.0",
+    "postcss-loader": "1.0.0",
+    "promise": "7.1.1",
+    "react-dev-utils": "^0.4.2",
+    "recursive-readdir": "2.1.0",
+    "solc": "^0.4.24",
+    "strip-ansi": "3.0.1",
+    "style-loader": "^0.22.0",
+    "stylelint": "^9.4.0",
+    "truffle-solidity-loader": "^0.0.8",
+    "url-loader": "0.5.7",
+    "webpack-bundle-analyzer": "^2.13.1",
+    "webpack-cli": "^3.1.0",
+    "webpack-dev-server": "3.1.3",
+    "webpack-manifest-plugin": "1.1.0",
+    "webpack-merge": "^4.1.4",
+    "whatwg-fetch": "1.0.0"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "config": "^2.0.1",
+    "dotenv": "^2.0.0",
+    "express": "^4.16.3",
+    "ganache-cli": "^6.1.6",
+    "lodash": "^4.17.10",
+    "morgan": "^1.9.0",
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2",
+    "react-hot-loader": "^4.3.4",
+    "react-router-dom": "^4.3.1",
+    "styled-components": "^3.4.2",
+    "truffle-contract": "^3.0.6",
+    "web3": "^1.0.0-beta.35",
+    "webpack": "^4.16.5",
+    "webpack-dev-middleware": "^3.1.3",
+    "webpack-hot-middleware": "^2.22.3"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --cache",
+      "git add"
+    ]
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx}"
+    ],
+    "setupFiles": [
+      "<rootDir>/config/polyfills.js"
+    ],
+    "testMatch": [
+      "<rootDir>/src/**/__tests__/**/*.js?(x)",
+      "<rootDir>/src/**/?(*.)(spec|test).js?(x)"
+    ],
+    "testEnvironment": "node",
+    "testURL": "http://localhost",
+    "transform": {
+      "^.+\\.(js|jsx)$": "<rootDir>/node_modules/babel-jest",
+      "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
+      "^(?!.*\\.(js|jsx|css|json)$)": "<rootDir>/config/jest/fileTransform.js"
+    },
+    "transformIgnorePatterns": [
+      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$"
+    ],
+    "moduleNameMapper": {
+      "^react-native$": "react-native-web"
+    },
+    "moduleFileExtensions": [
+      "web.js",
+      "js",
+      "json",
+      "web.jsx",
+      "jsx"
+    ],
+    "setupTestFrameworkScriptFile": "<rootDir>config/enzyme/setupTests.js"
+  }
+}
