@@ -24,7 +24,11 @@ module.exports = {
     publicPath: "/dist/",
   },
   module: {
-    rules: [{ test: /\.js$/, exclude: /node_modules/, use: "babel-loader" }],
+    rules: [
+      { test: /\.js$/, exclude: /node_modules/, use: "babel-loader" },
+      { use: ["style-loader", "css-loader"], test: /\.(css|scss)$/ },
+      { test: /\.(svg)$/, use: "svg-inline-loader" },
+    ],
   },
   resolve: {
     extensions: [".js"],

@@ -1,5 +1,4 @@
 import Web3 from "web3";
-import ganache from "ganache-cli";
 import _isUndefined from "lodash/isUndefined";
 
 const getWeb3 = new Promise(resolve => {
@@ -12,15 +11,18 @@ const getWeb3 = new Promise(resolve => {
       // Use Mist/MetaMask's provider.
       web3 = new Web3(web3.currentProvider);
       results = { web3 };
+      const accounts = web3.eth.accounts;
+      console.log(`Accounts: ${accounts}`);
       console.log("Injected web3 detected.");
       resolve(results);
     } else {
       // Fallback to localhost if no web3 injection. We've configured this to
       // use the development console's port by default.
-      web3.setProvider(ganache.provider());
-      // const provider = new Web3.providers.HttpProvider("http://127.0.0.1:8545");
-      // web3 = new Web3(provider);
+      const provider = new Web3.providers.HttpProvider("http://127.0.0.1:8545");
+      web3 = new Web3(provider);
       results = { web3 };
+      const accounts = web3.eth.accounts;
+      console.log(`Accounts: ${accounts}`);
       console.log("No web3 instance injected, using Local web3.");
       resolve(results);
     }

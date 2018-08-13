@@ -4,6 +4,8 @@ module.exports = {
     "@tokenfoundry/eslint-config/jest",
   ],
   rules: {
+    "react/no-array-index-key": "off",
+    "lines-between-class-members": "off",
     "promise/prefer-await-to-then": "off",
     "react/forbid-prop-types": "off",
     "jsx-a11y/anchor-is-valid": [
