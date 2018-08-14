@@ -1,23 +1,20 @@
 import React, { Fragment } from "react";
 import PropTypes from "prop-types";
-import Select from "../../atoms/Select";
 
-const AccountSelector = ({ changeAccount, user, accounts }) => (
+const AccountSelector = ({ user }) => (
   <Fragment>
-    <h3>Choose Your Desired Ethereum Account:</h3>
-    <Select onChange={changeAccount} value={user} options={accounts} />
+    <p>
+      You are currently logged in as: <strong>{user}</strong>
+    </p>
   </Fragment>
 );
 
 AccountSelector.propTypes = {
-  changeAccount: PropTypes.func.isRequired,
   user: PropTypes.string,
-  accounts: PropTypes.array,
 };
 
 AccountSelector.defaultProps = {
   user: "",
-  accounts: [],
 };
 
 export default AccountSelector;

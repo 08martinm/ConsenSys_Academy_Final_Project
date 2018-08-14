@@ -1,10 +1,12 @@
 pragma solidity ^0.4.24;
+import "installed_contracts/oraclize-api/contracts/usingOraclize.sol";
 
 
-contract BountyStorage {
+contract BountyStorage is usingOraclize {
     uint public nextBountyId;
     mapping(uint => Bounty) public bounties;
     mapping(uint => Claimants) public claimants;
+
 
     enum Status { Unclaimed, PendingApproval, Arbitration, Resolved }
     struct Bounty {
@@ -28,10 +30,17 @@ contract BountyStorage {
         mapping(uint => Claimant) claimants;
     }
 
+    event LogConstructorInitiated(string nextStep);
     event addedBounty(address _from, uint _id);
     event claimedBounty(address _from, uint _claimantId, uint _bountyId);
     event approvedBounty(address _from, uint _claimantId, uint _bountyId);
     event arbitratedBounty(address _from, uint _id);
+    event requestingRandomNumber(address _from);
+    event receivedRandomNumber(address _from, bytes32 _myid, uint _result);
+
+    constructor() payable {
+        emit LogConstructorInitiated("Constructor was initiated. Call 'getRandom()' to send the Oraclize Query.");
+    }
 
     // TODO: make payable and accept/store balances
     function addBounty(string bountyText, uint completion, uint review, uint price) public {

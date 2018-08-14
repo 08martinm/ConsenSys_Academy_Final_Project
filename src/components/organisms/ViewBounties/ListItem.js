@@ -12,7 +12,7 @@ const ListItem = ({
   reviewExpiration,
   poster,
   bountyText,
-  instance,
+  bountyInstance,
   claimants,
   user,
 }) => (
@@ -29,7 +29,7 @@ const ListItem = ({
     </Accordion>
     <Accordion title="Claim Bounty">
       {poster !== user &&
-        state !== 3 && <ResponseForm instance={instance} id={id} />}
+        state !== 3 && <ResponseForm bountyInstance={bountyInstance} id={id} />}
       {poster === user &&
         state !== 3 &&
         "This is your post. Please view the claimants or sign into another account to respond."}
@@ -38,7 +38,7 @@ const ListItem = ({
     <Accordion title="Claimants">
       <Claimants
         claimants={claimants}
-        instance={instance}
+        bountyInstance={bountyInstance}
         id={id}
         user={user}
         poster={poster}
@@ -55,7 +55,7 @@ ListItem.propTypes = {
   reviewExpiration: PropTypes.number.isRequired,
   poster: PropTypes.string.isRequired,
   bountyText: PropTypes.string.isRequired,
-  instance: PropTypes.object.isRequired,
+  bountyInstance: PropTypes.object.isRequired,
   claimants: PropTypes.array.isRequired,
   user: PropTypes.string.isRequired,
 };

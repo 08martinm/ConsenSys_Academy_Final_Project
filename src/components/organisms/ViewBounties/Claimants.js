@@ -5,7 +5,7 @@ import Button from "../../atoms/Button";
 
 class Claimants extends Component {
   static propTypes = {
-    instance: PropTypes.object.isRequired,
+    bountyInstance: PropTypes.object.isRequired,
     claimants: PropTypes.array.isRequired,
     user: PropTypes.string.isRequired,
     poster: PropTypes.string.isRequired,
@@ -13,7 +13,7 @@ class Claimants extends Component {
   };
 
   handleClick = claimantId => {
-    this.props.instance.approveBounty(this.props.id, claimantId);
+    this.props.bountyInstance.approveBounty(this.props.id, claimantId);
   };
   render() {
     return this.props.claimants.map((obj, key) => (

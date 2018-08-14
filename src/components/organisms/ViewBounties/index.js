@@ -9,7 +9,7 @@ class ViewBounties extends Component {
     bounties: PropTypes.object.isRequired,
     claimants: PropTypes.object.isRequired,
     user: PropTypes.string.isRequired,
-    instance: PropTypes.object.isRequired,
+    bountyInstance: PropTypes.object.isRequired,
   };
   state = { filter: {} };
   noFilter = () => this.setState({ filter: {} });
@@ -30,7 +30,7 @@ class ViewBounties extends Component {
             {...bounty}
             user={this.props.user}
             claimants={this.props.claimants[bounty.id] || []}
-            instance={this.props.instance}
+            bountyInstance={this.props.bountyInstance}
           />
         ))}
       </Fragment>

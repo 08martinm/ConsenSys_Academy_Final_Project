@@ -5,15 +5,15 @@ import Button from "../../atoms/Button";
 
 class ResponseForm extends Component {
   static propTypes = {
-    instance: PropTypes.object.isRequired,
+    bountyInstance: PropTypes.object.isRequired,
     id: PropTypes.number.isRequired,
   };
   state = { response: "" };
   handleChange = ({ target: { id, value } }) => this.setState({ [id]: value });
   handleSubmit = e => {
     e.preventDefault();
-    const { instance, id } = this.props;
-    instance.claimBounty(id, this.state.response);
+    const { bountyInstance, id } = this.props;
+    bountyInstance.claimBounty(id, this.state.response);
   };
   render() {
     return (

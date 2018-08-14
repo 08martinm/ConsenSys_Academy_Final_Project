@@ -41,7 +41,7 @@ class Accordion extends Component {
   static propTypes = {
     children: PropTypes.node.isRequired,
     isOpen: PropTypes.bool,
-    title: PropTypes.string,
+    title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   };
 
   static defaultProps = {
