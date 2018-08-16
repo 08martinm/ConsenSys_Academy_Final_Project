@@ -6,7 +6,7 @@ import Claimants from "./Claimants";
 
 const ListItem = ({
   id,
-  state,
+  bountyState,
   price,
   completionExpiration,
   reviewExpiration,
@@ -19,7 +19,7 @@ const ListItem = ({
   <Accordion isOpen={false} title={bountyText}>
     <Accordion title="Info">
       <ul>
-        <li>{`Status: ${state}`}</li>
+        <li>{`Status: ${bountyState}`}</li>
         <li>{`Price: ${price}`}</li>
         <li>{`Completion Expiration: ${completionExpiration}`}</li>
         <li>{`Review Expiration: ${reviewExpiration}`}</li>
@@ -29,11 +29,14 @@ const ListItem = ({
     </Accordion>
     <Accordion title="Claim Bounty">
       {poster !== user &&
-        state !== 3 && <ResponseForm bountyInstance={bountyInstance} id={id} />}
+        (bountyState === "Unclaimed" || bountyState === "PendingApproval") && (
+          <ResponseForm bountyInstance={bountyInstance} id={id} />
+        )}
       {poster === user &&
-        state !== 3 &&
+        (bountyState === "Unclaimed" || bountyState === "PendingApproval") &&
         "This is your post. Please view the claimants or sign into another account to respond."}
-      {state === 3 && "This bounty has already been successfully completed!"}
+      {(bountyState === "Resolved" || bountyState === "FinalApproval") &&
+        "This bounty has already been successfully completed!"}
     </Accordion>
     <Accordion title="Claimants">
       <Claimants
@@ -42,6 +45,7 @@ const ListItem = ({
         id={id}
         user={user}
         poster={poster}
+        bountyState={bountyState}
       />
     </Accordion>
   </Accordion>
@@ -49,7 +53,7 @@ const ListItem = ({
 
 ListItem.propTypes = {
   id: PropTypes.number.isRequired,
-  state: PropTypes.number.isRequired,
+  bountyState: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
   completionExpiration: PropTypes.number.isRequired,
   reviewExpiration: PropTypes.number.isRequired,

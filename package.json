@@ -18,7 +18,8 @@
     "lint": "eslint . --cache",
     "lint-staged": "lint-staged",
     "ethereum-bridge": "node ethereum-bridge/bridge -a 9 --dev",
-    "start-ganache": "ganache-cli -m \"candy maple cake sugar pudding cream honey rich smooth crumble sweet treat\""
+    "start-ganache": "ganache-cli -m \"candy maple cake sugar pudding cream honey rich smooth crumble sweet treat\"",
+    "truffle-console": "truffle console --network development"
   },
   "devDependencies": {
     "@storybook/addon-a11y": "^3.4.10",
