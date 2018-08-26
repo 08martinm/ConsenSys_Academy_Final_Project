@@ -1,5 +1,4 @@
 import express from "express";
-import dotenv from "dotenv";
 import bodyParser from "body-parser";
 import logger from "morgan";
 import path from "path";
@@ -8,19 +7,20 @@ import webpackDevMiddleware from "webpack-dev-middleware";
 import webpackHotMiddleware from "webpack-hot-middleware";
 // import routes from "./routes";
 // import db from "./db";
+import envVars from "../config/envVars";
 import webpackConfig from "../config/webpack/dev";
 
-dotenv.config();
-const config = require("config");
-
-const port = config.get("ports.app");
+const {
+  PORTS: { APP },
+  NODE_ENV,
+} = envVars;
 const app = express();
 
-app.use(logger(config.get("NODE_ENV") === "production" ? "combined" : "dev"));
+app.use(logger(NODE_ENV === "production" ? "combined" : "dev"));
 app.use(bodyParser.json());
 // app.use("/", routes);
 // Enable hot-reloading if not in "production"
-if (config.get("NODE_ENV") !== "production") {
+if (NODE_ENV !== "production") {
   const compiler = webpack(webpackConfig);
   const wpMw = webpackDevMiddleware(compiler, {});
   const wpHMw = webpackHotMiddleware(compiler);
@@ -41,7 +41,7 @@ app.get("*", (req, res) => res.redirect("/"));
 
 // syncDB();
 
-app.listen(port, err => {
+app.listen(APP, err => {
   if (err) throw err;
-  console.log(`Server running on: localhost:${port}`); // eslint-disable-line
+  console.log(`Server running on: localhost:${APP}`); // eslint-disable-line
 });

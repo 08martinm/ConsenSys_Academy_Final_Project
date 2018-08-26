@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "node server",
-    "start": "nodemon server",
+    "dev": "nodemon server",
+    "start": "node server",
     "storybook": "start-storybook -p 5001 -c config/storybook",
     "storybook-deploy": "build-storybook -c config/storybook -o .out -- --source-branch=proj/regFlowComponents --ci",
     "generate": "node ./config/generator/generateComponent.js",
