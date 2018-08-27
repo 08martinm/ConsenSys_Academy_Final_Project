@@ -1,9 +1,12 @@
-pragma solidity ^0.4.21;
+pragma solidity ^0.4.24;
 
+/** @title String Utility Functions */
 library StringUtils {
-    /// @dev Converts an unsigned integert to its string representation.
-    /// @param v The number to be converted.
-    function uintToBytes(uint v) view private returns (bytes32 ret) {
+    /** @dev Converts an unsigned integer to its bytes32 representation.
+      * @param v The number to be converted.
+      * @return ret The bytes32 representation of the unsigned integer.
+      */
+    function uintToBytes(uint v) private pure returns (bytes32 ret) {
         uint num = v;
         if (num == 0) {
             ret = "0";
@@ -18,6 +21,10 @@ library StringUtils {
         return ret;
     }
 
+    /** @dev Converts bytes32 variable to string representation.
+      * @param x The bytes32 variable to be converted.
+      * @return result The string representation of the bytes32 variable.
+      */
     function bytes32ToString (bytes32 x) private pure returns (string) {
         bytes memory bytesString = new bytes(32);
         uint charCount = 0;
@@ -36,7 +43,11 @@ library StringUtils {
         return string(resultBytes);
     }
 
-    function uintToString(uint v) view public returns (string ret) {
+    /** @dev Converts an unsigned integer to its string representation.
+      * @param v The number to be converted.
+      * @return ret The string representation of the unsigned integer.
+      */
+    function uintToString(uint v) public pure returns (string ret) {
         return bytes32ToString(uintToBytes(v));
     }
 }

@@ -43,8 +43,10 @@ class Landing extends Component {
         const accountInterval = this.setMetaMaskAccountListener();
         const bountyInstance = await this.initializeContract();
         this.setState({ bountyInstance, accountInterval }, async () => {
-          const { allBounties, allClaimants } = await this.initializeData();
-          this.initializeWatchers();
+          const { allBounties, allClaimants } = await this.initializeData(
+            bountyInstance,
+          );
+          this.initializeWatchers(bountyInstance, allBounties);
           this.setState({ allBounties, allClaimants });
         });
       });
@@ -111,10 +113,10 @@ class Landing extends Component {
     return deployedInstance;
   };
 
-  initializeData = async () => {
+  initializeData = async bountyInstance => {
     const allBounties = {};
     const allClaimants = {};
-    const bountyNumber = await this.state.bountyInstance.nextBountyId();
+    const bountyNumber = await bountyInstance.nextBountyId();
     /* eslint-disable no-await-in-loop */
     for (let i = 0; i < bountyNumber; i += 1) {
       const currentBounty = await this.getBounty(i);
@@ -126,12 +128,11 @@ class Landing extends Component {
     return { allBounties, allClaimants };
   };
 
-  initializeWatchers = () => {
-    const { bountyInstance } = this.state;
+  initializeWatchers = (bountyInstance, allBounties) => {
     bountyInstance.AddedBounty(async (err, log) => {
       console.log("AddedBounty log:", log);
       const id = log.args["id"].c[0];
-      if (!_has(this.state.allBounties, id)) {
+      if (!_has(allBounties, id)) {
         const bounty = await this.getBounty(id);
         this.setState(state => ({
           allBounties: { ...state.allBounties, [id]: bounty },
