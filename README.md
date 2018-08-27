@@ -9,12 +9,19 @@ The arbitration process happens by randomly selecting and arbitrator from a pre-
 
 Set-up:
 -------
-1. Run `yarn start-ganache`
-2. In a separate terminal window, run `yarn ethereum-bridge`. You must wait for this to load completely; can take a minute or two.
-3. Sign into metamask using truffle's development mnemonic: `candy maple cake sugar pudding cream honey rich smooth crumble sweet treat`
-4. In a third terminal window, run `yarn truffle compile && yarn truffle migrate`
-5. Run "yarn start"
-6. Go to `localhost:5000` to interact with dApp
+1. Run `git clone https://github.com/08martinm/ConsenSys_Academy_Final_Project.git && cd ConsenSys_Academy_Final_Project`
+2. Run `yarn` to install all dependencies in the project
+3. This project uses a submodule dependency, `ethereum-bridge`. To download, run `git submodule init && git submodule update && cd ethereum-bridge && yarn && cd ../`
+4. Run `yarn start-ganache`
+5. In a separate terminal window, run `yarn ethereum-bridge`. You must wait for this to load completely; can take a minute or two. It should end w/: `OAR = OraclizeAddrResolverI(0x6f485C8BF6fc43eA212E93BBF8ce046C7f1cb475);`. If you get a contract address different than the one above, pleae re-run steps 4 & 5. PLEASE NOTE: running tests for some reason will interfere w/ the `ethereum-bridge`. To play with the front-end functionality, please wait to run tests until the end, as it will cause the `ethereum-bridge` to fail.
+6. Sign into metamask using truffle's development mnemonic: `candy maple cake sugar pudding cream honey rich smooth crumble sweet treat`
+7. In a third terminal window, run `yarn truffle compile && yarn truffle migrate` (I downloaded truffle as a local dependency so that we have the same truffle and solc compiler versions)
+8. Run `yarn start`
+9. Go to `localhost:5000` to interact with dApp
+
+Tests:
+------
+1. Run `yarn truffle test` to run tests
 
 Interacting with dApp using front-end:
 --------------------------------------
@@ -31,6 +38,14 @@ Interacting with dApp using front-end:
 11. Change account back to account #1, expand "Claimants", expand first claimant, click "Reject this answer", and approve tx from metamask
 12. Change account back to account #2, expand "Claimants", expand first claimant, click "Dispute this result", and approve tx from metamask
 13. Change account back to account #3 (then account #4 if no option available), expand "Claimants", expand first claimant, click "Approve" or "Reject", and approve tx from metamask
+
+Library:
+--------
+1. `StringUtils.sol` is a library contract used in `RandNum.sol`
+
+Stretch Goals:
+--------------
+1. `RandNum.sol` uses Oraclize
 
 User Stories:
 -------------
